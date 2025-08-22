@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "Framelink_Figma_MCP": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key=your APIKEY",
+        "--stdio"
+      ],
+      "env": {}
+    }
+  }
+}

@@ -1,5 +1,30 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 環境設定
+
+開発を開始する前に、Figma連携のためのMCP（Model Context Protocol）サーバーを設定してください：
+
+1. `.env.local`からFIGMA_API_KEYをコピー
+2. `.mcp.json`ファイルを更新：
+   ```json
+   {
+     "mcpServers": {
+       "Framelink_Figma_MCP": {
+         "type": "stdio",
+         "command": "npx",
+         "args": [
+           "-y",
+           "figma-developer-mcp",
+           "--figma-api-key=ここにFIGMA_API_KEYを入力",
+           "--stdio"
+         ],
+         "env": {}
+       }
+     }
+   }
+   ```
+3. `ここにFIGMA_API_KEYを入力`を`.env.local`の実際のAPIキーに置き換えてください
+
 ## Getting Started
 
 First, run the development server:
@@ -33,4 +58,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.にｈ
