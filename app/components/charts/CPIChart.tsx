@@ -1,0 +1,90 @@
+'use client'
+
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useFredData } from '@/hooks/useFredData';
+
+export function CPIChart() {
+  const { data, loading, error } = useFredData('cpi');
+
+  if (loading) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 h-full">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          CPI - Last Five Years
+        </h2>
+        <div className="h-80 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <span className="ml-2 text-gray-600">Loading CPI data...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 h-full">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          CPI - Last Five Years
+        </h2>
+        <div className="h-80 flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-red-600 mb-2">⚠️ Data temporarily unavailable</div>
+            <div className="text-sm text-gray-600">Using fallback data</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 h-full">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold text-gray-900">
+          CPI - Last Five Years
+        </h2>
+        <div className="text-xs text-gray-500 flex items-center">
+          <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+          FRED Data
+        </div>
+      </div>
+      <div className="h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 20,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis 
+              dataKey="year" 
+              tick={{ fontSize: 12 }}
+              angle={-45}
+              textAnchor="end"
+              height={60}
+            />
+            <YAxis 
+              tick={{ fontSize: 12 }}
+              domain={[0, 10]}
+            />
+            <Tooltip 
+              formatter={(value) => [`${value}%`, 'CPI Year-over-Year']}
+              labelFormatter={(label) => `Period: ${label}`}
+            />
+            <Line 
+              type="monotone" 
+              dataKey="value" 
+              stroke="#2563eb" 
+              strokeWidth={2}
+              dot={{ r: 4 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
