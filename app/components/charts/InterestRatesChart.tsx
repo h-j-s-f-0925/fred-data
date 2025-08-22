@@ -85,6 +85,17 @@ export function InterestRatesChart() {
           </LineChart>
         </ResponsiveContainer>
       </div>
+      <div className="mt-4 pt-4 border-t border-gray-200">
+        <a 
+          href="https://fred.stlouisfed.org/series/DGS10" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-xs text-blue-600 hover:text-blue-800 hover:underline flex items-center"
+        >
+          <span className="mr-1">🔗</span>
+          View on FRED: 10-Year Treasury Constant Maturity Rate
+        </a>
+      </div>
     </div>
   );
 }
